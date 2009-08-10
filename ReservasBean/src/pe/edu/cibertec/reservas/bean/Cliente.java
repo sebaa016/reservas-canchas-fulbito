@@ -32,6 +32,13 @@ public abstract class Cliente {
     public Cliente () {
     }
 
+    public Cliente(int codigo, String direccion, int telefono, String email) {
+        this.codigo = codigo;
+        this.direccion = direccion;
+        this.telefono = telefono;
+        this.email = email;
+    }
+
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,regenBody=yes,id=DCE.35DD14FA-3743-12CB-31D7-9AED11DF6FD9]
     // </editor-fold> 

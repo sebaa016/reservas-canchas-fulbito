@@ -27,6 +27,13 @@ public class Empresa extends Cliente {
     public Empresa () {
     }
 
+    public Empresa(int codigo,int ruc, String razonSocial, String paginaWeb, String direccion,String email, int telefono) {
+        super(codigo, direccion, telefono, email);
+        this.ruc = ruc;
+        this.razonSocial = razonSocial;
+        this.paginaWeb = paginaWeb;
+    }
+
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,regenBody=yes,id=DCE.D35988C2-5931-FCB8-9455-C0ADD86D1166]
     // </editor-fold> 
@@ -55,34 +62,6 @@ public class Empresa extends Cliente {
         this.ruc = val;
     }
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.65D42F3F-FD3F-B79B-E0E0-D2E59D0FE76B]
-    // </editor-fold> 
-    @Override
-    public int getCodigo () {
-        return 0;
-    }
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.A31B0702-FE53-BD61-F03A-03A7EB2C2E18]
-    // </editor-fold> 
-    @Override
-    public void setCodigo (int val) {
-    }
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.805F46BC-F216-E848-1F0E-DCAC20692E5C]
-    // </editor-fold> 
-    @Override
-    public String getDireccion () {
-        return null;
-    }
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.A167DCF0-6DA4-C24C-FECE-CDA22308D633]
-    // </editor-fold> 
-    public void setDireccion (String val) {
-    }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,regenBody=yes,id=DCE.79792027-D14D-2F64-8989-0B203FA28502]
