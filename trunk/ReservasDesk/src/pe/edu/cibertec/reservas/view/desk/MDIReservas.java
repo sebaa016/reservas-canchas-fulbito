@@ -22,44 +22,60 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
+import pe.edu.cibertec.security.bean.Usuario;
 
 /**
  *
  * @author Adrian
  */
 public class MDIReservas extends JFrame {
- private MDIDesktopPane desktop = new MDIDesktopPane();
+  static Usuario usuario = null;
+  private MDIDesktopPane desktop = new MDIDesktopPane();
 
   private JMenuBar menuBar = new JMenuBar();
-  private JMenu reservaMenu = new JMenu("Reservas");
+  private JMenu transacMenu = new JMenu("Transacciones");
+  private JMenu mantenMenu = new JMenu("Mantenimiento");
   private WindowMenu winMenu = new WindowMenu(desktop);
 
   private JMenuItem reservaMenuItem = new JMenuItem("Reserva Cancha");
+  private JMenuItem clienteMenuItem = new JMenuItem("Cliente");
 
   private JScrollPane scrollPane = new JScrollPane();
     /** Creates new form MDIReservas */
     public MDIReservas() {
-        menuBar.add(reservaMenu);
+        menuBar.add(transacMenu);
+        menuBar.add(mantenMenu);
         menuBar.add(winMenu);
-        reservaMenu.add(reservaMenuItem);
+        transacMenu.add(reservaMenuItem);
+        mantenMenu.add(clienteMenuItem);
         setJMenuBar(menuBar);
         setTitle("MDI Reservas");
         scrollPane.getViewport().add(desktop);
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(scrollPane, BorderLayout.CENTER);
 
-    addWindowListener(new WindowAdapter() {
-      public void windowClosing(WindowEvent e) {
-        System.exit(0);
-      }
-    });
-    reservaMenuItem.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent ae) {
-        desktop.add(new frmReservas1());
-      }
-    });
+       addWindowListener(new WindowAdapter() {
+          public void windowClosing(WindowEvent e) {
+              System.exit(0);
+           }
+        });
+        reservaMenuItem.addActionListener(new ActionListener() {
+             public void actionPerformed(ActionEvent ae) {
+               desktop.add(new frmReservas());
+             }
+        });
+
+        clienteMenuItem.addActionListener(new ActionListener() {
+             public void actionPerformed(ActionEvent ae) {
+               desktop.add(new frmCliente());
+             }
+        });
 
         initComponents();
+        dlgAuthentication dlgAutenticacion = new dlgAuthentication(this, true);
+        dlgAutenticacion.setLocation(400,250);
+        dlgAutenticacion.setVisible(true);
+        this.setExtendedState(this.MAXIMIZED_BOTH);
     }
 
     /** This method is called from within the constructor to

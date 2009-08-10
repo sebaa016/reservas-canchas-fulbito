@@ -57,7 +57,9 @@ public class MySQLClienteDAO implements ClienteDAO{
                   } else {
                       Persona p = new Persona();
                       p.setCodigo(rs.getInt("codigo"));
-                      p.setNombre(rs.getString("nombres"));
+                      p.setNombre(rs.getString("nombre"));
+                      p.setApellidoMat(rs.getString("apellidomat"));
+                      p.setApellidoPat(rs.getString("apellidopat"));
                       p.setDireccion(rs.getString("direccion"));
                       p.setEmail(rs.getString("email"));
                       p.setSexo(rs.getString("sexo").charAt(0));
@@ -93,29 +95,33 @@ public class MySQLClienteDAO implements ClienteDAO{
             //1 y 2. Se registra el driver y se obtiene la conexion a la BD
             conn = UtilDAO.getConnection(DAOFactory.MYSQL);
             //3. Se prepara la sentencia SQL
-            String sql = "{call usp_addCliente(?,?,?,?,?,?,?,?,?)}";
+            String sql = "{call usp_addCliente(?,?,?,?,?,?,?,?,?,?,?)}";
             cstmt = conn.prepareCall(sql);
             if (c instanceof Persona){
                 cstmt.setString(1, "P");
                 Persona p = (Persona)c;
                 cstmt.setString(2, p.getNombre());
-                cstmt.setDate(6, (Date)p.getFechaNac());
-                cstmt.setString(7, String.valueOf(p.getSexo()));
-                cstmt.setInt(8, (p.getDni()));
-                cstmt.setString(9, null);
+                cstmt.setString(3,p.getApellidoPat());
+                cstmt.setString(4,p.getApellidoMat());
+                cstmt.setDate(8, (Date)p.getFechaNac());
+                cstmt.setString(9, String.valueOf(p.getSexo()));
+                cstmt.setInt(10, (p.getDni()));
+                cstmt.setString(11, null);
             }else {
                 cstmt.setString(1, "E");
                 Empresa e = (Empresa)c;
                 cstmt.setString(2, e.getRazonSocial());
-                cstmt.setDate(6, null);
-                cstmt.setString(7, null);
-                cstmt.setInt(8, (e.getRuc()));
+                cstmt.setString(3, null);
+                cstmt.setString(4, null);
+                cstmt.setDate(8, null);
+                cstmt.setString(9, null);
+                cstmt.setInt(10, (e.getRuc()));
 
-                cstmt.setString(9, (e.getPaginaWeb()));
+                cstmt.setString(11, (e.getPaginaWeb()));
             }
-            cstmt.setString(3, c.getDireccion());
-            cstmt.setInt(4, c.getTelefono());
-            cstmt.setString(5, c.getEmail());
+            cstmt.setString(5, c.getDireccion());
+            cstmt.setInt(6, c.getTelefono());
+            cstmt.setString(7, c.getEmail());
 
             //4. Se ejecuta la sentencia SQL
              cstmt.execute();
@@ -140,30 +146,34 @@ public class MySQLClienteDAO implements ClienteDAO{
             //1 y 2. Se registra el driver y se obtiene la conexion a la BD
             conn = UtilDAO.getConnection(DAOFactory.MYSQL);
             //3. Se prepara la sentencia SQL
-            String sql = "{call usp_updCliente(?,?,?,?,?,?,?,?,?,?)}";
+            String sql = "{call usp_updCliente(?,?,?,?,?,?,?,?,?,?,?,?)}";
             cstmt = conn.prepareCall(sql);
             cstmt.setInt(1, c.getCodigo());
             if (c instanceof Persona){
                 cstmt.setString(2, "P");
                 Persona p = (Persona)c;
                 cstmt.setString(3, p.getNombre());
-                cstmt.setDate(7, (Date)p.getFechaNac());
-                cstmt.setString(8, String.valueOf(p.getSexo()));
-                cstmt.setInt(9, (p.getDni()));
-                 cstmt.setString(10, null);
+                cstmt.setString(4, p.getApellidoPat());
+                cstmt.setString(5, p.getApellidoMat());
+                cstmt.setDate(9, (Date)p.getFechaNac());
+                cstmt.setString(10, String.valueOf(p.getSexo()));
+                cstmt.setInt(11, (p.getDni()));
+                 cstmt.setString(12, null);
             }else {
                 cstmt.setString(2, "E");
                 Empresa e = (Empresa)c;
                 cstmt.setString(3, e.getRazonSocial());
-                cstmt.setDate(7, null);
-                cstmt.setString(8,null);
-                cstmt.setInt(9, e.getRuc());
+                cstmt.setString(4,null);
+                cstmt.setString(5,null);
+                cstmt.setDate(9, null);
+                cstmt.setString(10,null);
+                cstmt.setInt(11, e.getRuc());
 
-                cstmt.setString(10, (e.getPaginaWeb()));
+                cstmt.setString(12, (e.getPaginaWeb()));
             }
-            cstmt.setString(4, c.getDireccion());
-            cstmt.setInt(5, c.getTelefono());
-            cstmt.setString(6, c.getEmail());
+            cstmt.setString(6, c.getDireccion());
+            cstmt.setInt(7, c.getTelefono());
+            cstmt.setString(8, c.getEmail());
             //4. Se ejecuta la sentencia SQL
              cstmt.execute();
 

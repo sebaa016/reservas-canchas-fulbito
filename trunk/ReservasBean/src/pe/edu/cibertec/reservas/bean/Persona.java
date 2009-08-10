@@ -44,6 +44,19 @@ public class Persona extends Cliente {
     public Persona () {
     }
 
+
+    public Persona(int codigo ,int dni, String apellidoPat, String apellidoMat, String nombre, Date fechaNac, char sexo, String direccion, String email, int telefono) {
+        super(codigo, direccion, telefono, email);
+        this.dni = dni;
+        this.apellidoPat = apellidoPat;
+        this.apellidoMat = apellidoMat;
+        this.nombre = nombre;
+        this.fechaNac = fechaNac;
+        this.sexo = sexo;
+
+    }
+
+
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,regenBody=yes,id=DCE.C2D19EF2-9114-CC32-BB7D-0F5123662771]
     // </editor-fold> 
@@ -98,32 +111,6 @@ public class Persona extends Cliente {
     // </editor-fold> 
     public void setNombre (String val) {
         this.nombre = val;
-    }
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.3365CE1B-47E9-1C7E-8752-618C2A9280D9]
-    // </editor-fold> 
-    public String getDireccion () {
-        return null;
-    }
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.C3219A60-558D-9EBA-AB2F-93A4C1A4C157]
-    // </editor-fold> 
-    public void setDireccion (String val) {
-    }
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.DBE785B5-CD5D-B901-EBEF-8D8DE2BFA248]
-    // </editor-fold> 
-    public int getCodigo () {
-        return 0;
-    }
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.34FF2939-6F05-6203-8C6B-947622E6622B]
-    // </editor-fold> 
-    public void setCodigo (int val) {
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 

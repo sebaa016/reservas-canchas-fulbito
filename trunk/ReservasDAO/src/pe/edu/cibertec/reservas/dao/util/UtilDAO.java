@@ -23,7 +23,7 @@ public class UtilDAO {
         String password = "";  //password de BD
         switch (tipoBD){
             case DAOFactory.MYSQL: driver = "com.mysql.jdbc.Driver";
-                                                        url = "jdbc:mysql://localhost:3306/ventas";
+                                                        url = "jdbc:mysql://localhost:3306/reservas";
                                                         usuario = "root";
                                                         password = "admin";
                                                         break;
