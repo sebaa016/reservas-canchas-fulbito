@@ -5,6 +5,7 @@
 
 package pe.edu.cibertec.reservas.dao.factory;
 
+import pe.edu.cibertec.reservas.dao.interfaces.CanchaDAO;
 import pe.edu.cibertec.reservas.dao.interfaces.ClienteDAO;
 import pe.edu.cibertec.reservas.dao.interfaces.UsuarioDAO;
 import pe.edu.cibertec.reservas.dao.interfaces.VentaDAO;
@@ -33,5 +34,6 @@ public abstract class DAOFactory {
     public abstract UsuarioDAO getUsuarioDAO();
     public abstract ClienteDAO getClienteDAO();
     public abstract VentaDAO getVentaDAO();
+    public abstract CanchaDAO getCanchaDAO();
 
 }

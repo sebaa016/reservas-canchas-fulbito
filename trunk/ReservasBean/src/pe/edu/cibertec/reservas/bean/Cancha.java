@@ -23,11 +23,29 @@ public class Cancha {
     // </editor-fold> 
     private Date fechaUltMant;
 
+    private String descripcion;
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.23E7FE45-08D7-BE6D-D5CF-6FBCF4312E99]
     // </editor-fold> 
     public Cancha () {
     }
+
+    public Cancha(int codigo, int capacidad, Date fechaUltMant, String descripcion) {
+        this.codigo = codigo;
+        this.capacidad = capacidad;
+        this.fechaUltMant = fechaUltMant;
+        this.descripcion = descripcion;
+    }
+
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,regenBody=yes,id=DCE.2842C279-743E-7B78-392D-66FD665F3B32]
