@@ -27,6 +27,9 @@ import pe.edu.cibertec.reservas.dao.interfaces.ClienteDAO;
 public class frmCliente extends javax.swing.JInternalFrame {
 
     /** Creates new form VICliente */
+    private int intOpcion;
+    private static int NUEVO = 1;
+    private static int MODIFICAR = 2;
     public frmCliente() {
         super("Mantenimiento de Clientes",false,true,false,true);
         initComponents();
@@ -72,12 +75,14 @@ public class frmCliente extends javax.swing.JInternalFrame {
         txtApellidoPat = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         txtApellidoMat = new javax.swing.JTextField();
-        btnIngresar = new javax.swing.JButton();
-        btnModificar = new javax.swing.JButton();
-        btnEliminar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblClientes = new javax.swing.JTable();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        mnNuevo = new javax.swing.JMenu();
+        mnGrabar = new javax.swing.JMenu();
+        mnEditar = new javax.swing.JMenu();
+        mnEliminar = new javax.swing.JMenu();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -239,27 +244,6 @@ public class frmCliente extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        btnIngresar.setText("Ingresar");
-        btnIngresar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIngresarActionPerformed(evt);
-            }
-        });
-
-        btnModificar.setText("Modificar");
-        btnModificar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnModificarActionPerformed(evt);
-            }
-        });
-
-        btnEliminar.setText("Eliminar");
-        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarActionPerformed(evt);
-            }
-        });
-
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         tblClientes.setModel(new javax.swing.table.DefaultTableModel(
@@ -273,6 +257,7 @@ public class frmCliente extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblClientes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tblClientes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblClientesMouseClicked(evt);
@@ -291,11 +276,73 @@ public class frmCliente extends javax.swing.JInternalFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(78, Short.MAX_VALUE))
         );
+
+        mnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pe/edu/cibertec/reservas/view/desk/images/group_blue_new.png"))); // NOI18N
+        mnNuevo.setToolTipText("Nuevo");
+        mnNuevo.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/pe/edu/cibertec/reservas/view/desk/images/group_grey_new.png"))); // NOI18N
+        mnNuevo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mnNuevoMouseClicked(evt);
+            }
+        });
+        mnNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnNuevoActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(mnNuevo);
+
+        mnGrabar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pe/edu/cibertec/reservas/view/desk/images/group_blue_add.png"))); // NOI18N
+        mnGrabar.setToolTipText("Grabar");
+        mnGrabar.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/pe/edu/cibertec/reservas/view/desk/images/group_grey_add.png"))); // NOI18N
+        mnGrabar.setEnabled(false);
+        mnGrabar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mnGrabarMouseClicked(evt);
+            }
+        });
+        mnGrabar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnGrabarActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(mnGrabar);
+
+        mnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pe/edu/cibertec/reservas/view/desk/images/group_blue_edit.png"))); // NOI18N
+        mnEditar.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/pe/edu/cibertec/reservas/view/desk/images/group_grey_edit.png"))); // NOI18N
+        mnEditar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mnEditarMouseClicked(evt);
+            }
+        });
+        mnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnEditarActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(mnEditar);
+
+        mnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pe/edu/cibertec/reservas/view/desk/images/group_blue_remove.png"))); // NOI18N
+        mnEliminar.setToolTipText("Eliminar");
+        mnEliminar.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/pe/edu/cibertec/reservas/view/desk/images/group_grey_remove.png"))); // NOI18N
+        mnEliminar.setEnabled(false);
+        mnEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mnEliminarMouseClicked(evt);
+            }
+        });
+        mnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnEliminarActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(mnEliminar);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -303,53 +350,47 @@ public class frmCliente extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnIngresar)
-                        .addGap(38, 38, 38)
-                        .addComponent(btnModificar)
-                        .addGap(48, 48, 48)
-                        .addComponent(btnEliminar)
-                        .addGap(83, 83, 83))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(23, 23, 23))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
-
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnEliminar, btnIngresar, btnModificar});
-
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(btnIngresar)
-                    .addComponent(btnModificar)
-                    .addComponent(btnEliminar))
                 .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-       if (rbtnPersona.isSelected()){
+    private void tblClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClientesMouseClicked
+                 SeleccionarRegistro();
+    }//GEN-LAST:event_tblClientesMouseClicked
+
+    private void mnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnEliminarActionPerformed
+                GestorCliente.delete((Integer.parseInt(txtCodigo.getText())));
+                refrescarGrid();
+                limpiarText();
+    }//GEN-LAST:event_mnEliminarActionPerformed
+
+    private void mnGrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnGrabarActionPerformed
+        if (intOpcion == NUEVO) {
+        if (rbtnPersona.isSelected()){
         GestorCliente.add(new Persona(0,
                                       Integer.parseInt(txtNroDoc.getText()),
                                       txtApellidoPat.getText(),
                                       txtApellidoMat.getText(),
                                       txtNombre.getText(),
-                                      Date.valueOf(txtFechaNac.getText()),  
+                                      Date.valueOf(txtFechaNac.getText()),
                                       cmbSexo.getSelectedItem().toString().charAt(0),
                                       txtDireccion.getText(),
                                       txtEmail.getText(),
                                       Integer.parseInt(txtTelefono.getText())));
-                                
+
 
          }else{
                GestorCliente.add(new Empresa(0,
@@ -359,13 +400,10 @@ public class frmCliente extends javax.swing.JInternalFrame {
                                       txtDireccion.getText(),
                                       txtEmail.getText(),
                                       Integer.parseInt(txtTelefono.getText())));
-;
-         }
-        refrescarGrid();
-        limpiarText();
-    }//GEN-LAST:event_btnIngresarActionPerformed
 
-    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+         }
+        }
+        else {
         if (rbtnPersona.isSelected()){
         GestorCliente.update(new Persona(Integer.parseInt(txtCodigo.getText()),
                                       Integer.parseInt(txtNroDoc.getText()),
@@ -387,20 +425,109 @@ public class frmCliente extends javax.swing.JInternalFrame {
                                       txtEmail.getText(),
                                       Integer.parseInt(txtTelefono.getText())));
          }
+
+        }
         refrescarGrid();
         limpiarText();
-    
-    }//GEN-LAST:event_btnModificarActionPerformed
 
-    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+    }//GEN-LAST:event_mnGrabarActionPerformed
+
+    private void mnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnNuevoActionPerformed
+        intOpcion = NUEVO;
+        limpiarText();
+    }//GEN-LAST:event_mnNuevoActionPerformed
+
+    private void mnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnEditarActionPerformed
+        SeleccionarRegistro();
+    }//GEN-LAST:event_mnEditarActionPerformed
+
+    private void mnNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnNuevoMouseClicked
+        intOpcion = NUEVO;
+        limpiarText();
+        mnNuevo.setEnabled(false);
+        mnGrabar.setEnabled(true);
+        mnEditar.setEnabled(false);
+    }//GEN-LAST:event_mnNuevoMouseClicked
+
+    private void mnGrabarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnGrabarMouseClicked
+
+        if (intOpcion == NUEVO) {
+        if (rbtnPersona.isSelected()){
+        GestorCliente.add(new Persona(0,
+                                      Integer.parseInt(txtNroDoc.getText()),
+                                      txtApellidoPat.getText(),
+                                      txtApellidoMat.getText(),
+                                      txtNombre.getText(),
+                                      Date.valueOf(txtFechaNac.getText()),
+                                      cmbSexo.getSelectedItem().toString().charAt(0),
+                                      txtDireccion.getText(),
+                                      txtEmail.getText(),
+                                      Integer.parseInt(txtTelefono.getText())));
+
+
+         }else{
+               GestorCliente.add(new Empresa(0,
+                                      Integer.parseInt(txtNroDoc.getText()),
+                                      txtNombre.getText(),
+                                      txtWeb.getText(),
+                                      txtDireccion.getText(),
+                                      txtEmail.getText(),
+                                      Integer.parseInt(txtTelefono.getText())));
+
+         }
+        }
+        else {
+        if (rbtnPersona.isSelected()){
+        GestorCliente.update(new Persona(Integer.parseInt(txtCodigo.getText()),
+                                      Integer.parseInt(txtNroDoc.getText()),
+                                      txtApellidoPat.getText(),
+                                      txtApellidoMat.getText(),
+                                      txtNombre.getText(),
+                                      Date.valueOf(txtFechaNac.getText()),
+                                      cmbSexo.getSelectedItem().toString().charAt(0),
+                                      txtDireccion.getText(),
+                                      txtEmail.getText(),
+                                      Integer.parseInt(txtTelefono.getText())));
+
+         }else {
+               GestorCliente.update(new Empresa(Integer.parseInt(txtCodigo.getText()),
+                                      Integer.parseInt(txtNroDoc.getText()),
+                                      txtNombre.getText(),
+                                      txtWeb.getText(),
+                                      txtDireccion.getText(),
+                                      txtEmail.getText(),
+                                      Integer.parseInt(txtTelefono.getText())));
+         }
+
+        }
+        mnGrabar.setEnabled(false);
+        mnNuevo.setEnabled(true);
+        mnEditar.setEnabled(true);
+        refrescarGrid();
+        limpiarText();
+
+    }//GEN-LAST:event_mnGrabarMouseClicked
+
+    private void mnEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnEditarMouseClicked
+        
+        SeleccionarRegistro();
+
+
+    }//GEN-LAST:event_mnEditarMouseClicked
+
+    private void mnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnEliminarMouseClicked
                 GestorCliente.delete((Integer.parseInt(txtCodigo.getText())));
                 refrescarGrid();
                 limpiarText();
-    }//GEN-LAST:event_btnEliminarActionPerformed
-
-    private void tblClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClientesMouseClicked
+    }//GEN-LAST:event_mnEliminarMouseClicked
+    private void SeleccionarRegistro(){
         int filSel = tblClientes.getSelectedRow();
         if (filSel != -1){
+                intOpcion = MODIFICAR;
+                mnEditar.setEnabled(false);
+                mnNuevo.setEnabled(false);
+                mnGrabar.setEnabled(true);
+                mnEliminar.setEnabled(true);
                 limpiarText();
                 Cliente c = (Cliente) model.lista.get(filSel);
                 txtCodigo.setText("" + c.getCodigo());
@@ -433,14 +560,10 @@ public class frmCliente extends javax.swing.JInternalFrame {
                 }
         }
 
-    }//GEN-LAST:event_tblClientesMouseClicked
-
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEliminar;
     private javax.swing.ButtonGroup btnGroup;
-    private javax.swing.JButton btnIngresar;
-    private javax.swing.JButton btnModificar;
     private javax.swing.JComboBox cmbSexo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -453,11 +576,16 @@ public class frmCliente extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
+    private javax.swing.JMenu mnEditar;
+    private javax.swing.JMenu mnEliminar;
+    private javax.swing.JMenu mnGrabar;
+    private javax.swing.JMenu mnNuevo;
     private javax.swing.JRadioButton rbtnEmpresa;
     private javax.swing.JRadioButton rbtnPersona;
     private javax.swing.JTable tblClientes;
