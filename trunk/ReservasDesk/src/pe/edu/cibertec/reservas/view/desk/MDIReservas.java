@@ -38,6 +38,7 @@ public class MDIReservas extends JFrame {
   private WindowMenu winMenu = new WindowMenu(desktop);
 
   private JMenuItem reservaMenuItem = new JMenuItem("Reserva Cancha");
+  private JMenuItem canchaMenuItem = new JMenuItem("Cancha");
   private JMenuItem clienteMenuItem = new JMenuItem("Cliente");
 
   private JScrollPane scrollPane = new JScrollPane();
@@ -47,6 +48,7 @@ public class MDIReservas extends JFrame {
         menuBar.add(mantenMenu);
         menuBar.add(winMenu);
         transacMenu.add(reservaMenuItem);
+        mantenMenu.add(canchaMenuItem);
         mantenMenu.add(clienteMenuItem);
         setJMenuBar(menuBar);
         setTitle("MDI Reservas");
@@ -71,6 +73,11 @@ public class MDIReservas extends JFrame {
              }
         });
 
+        canchaMenuItem.addActionListener(new ActionListener() {
+             public void actionPerformed(ActionEvent ae) {
+               desktop.add(new frmCancha());
+             }
+        });
         initComponents();
         dlgAuthentication dlgAutenticacion = new dlgAuthentication(this, true);
         dlgAutenticacion.setLocation(400,250);
