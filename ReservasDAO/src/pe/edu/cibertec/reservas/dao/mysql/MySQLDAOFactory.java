@@ -6,6 +6,7 @@
 package pe.edu.cibertec.reservas.dao.mysql;
 
 import pe.edu.cibertec.reservas.dao.factory.DAOFactory;
+import pe.edu.cibertec.reservas.dao.interfaces.CanchaDAO;
 import pe.edu.cibertec.reservas.dao.interfaces.ClienteDAO;
 import pe.edu.cibertec.reservas.dao.interfaces.UsuarioDAO;
 import pe.edu.cibertec.reservas.dao.interfaces.VentaDAO;
@@ -33,6 +34,10 @@ public class MySQLDAOFactory extends DAOFactory{
         return new MySQLVentaDAO();
     }
 
+    @Override
+    public CanchaDAO getCanchaDAO() {
+        return new MySQLCanchaDAO();
+    }
 
 
 }
